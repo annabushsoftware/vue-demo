@@ -1,15 +1,19 @@
 <template>
   <div class="about">
     <h1>This is an about page</h1>
+    <b-button variant="primary">Button</b-button>
   </div>
 </template>
 
-<style>
-@media (min-width: 1024px) {
-  .about {
+<style lang="scss">
+.about {
+  @media (min-width: 1024px) {
     min-height: 100vh;
-    display: flex;
-    align-items: center;
+    margin-top: calc(50vh - 86px);
+  }
+
+  @media(max-width: 1023px) {
+    text-align: center;
   }
 }
 </style>
