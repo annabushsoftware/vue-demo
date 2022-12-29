@@ -1,43 +1,24 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
+import { RouterView } from 'vue-router'
 </script>
 
 <template>
-  <div class="wrapper">
-    <nav>
-      <RouterLink to="/">Home</RouterLink>
-      <RouterLink to="/about">About</RouterLink>
-      <RouterLink to="/schedule-demo">Schedule Demo</RouterLink>
-    </nav>
-  </div>
+  <b-navbar toggleable="lg" type="light" variant="info" fixed="top">
+    <b-navbar-brand href="#">Vue Demo App</b-navbar-brand>
+  
+    <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+  
+    <b-collapse id="nav-collapse" is-nav>
+      <b-navbar-nav>
+        <b-nav-item to="/">Home</b-nav-item>
+        <b-nav-item to="/about">About</b-nav-item>
+        <b-nav-item to="/schedule-demo">Schedule Demo</b-nav-item>
+      </b-navbar-nav>
+    </b-collapse>
+  </b-navbar>
 
-  <RouterView />
+  <div class="app-body">
+    <RouterView />
+  </div>
 </template>
 
-<style scoped>
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
-}
-
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
-</style>
