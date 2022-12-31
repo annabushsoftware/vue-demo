@@ -33,4 +33,11 @@ npm run build
 ```sh
 npm run lint
 ```
-# vue-demo
+
+# Helpful Docs
+
+[Vue.js](https://vuejs.org/guide/essentials/application.html)
+
+[BootstrapVue 3](https://cdmoro.github.io/bootstrap-vue-3/components/)
+
+
