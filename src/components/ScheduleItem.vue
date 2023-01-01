@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="schedule-item">
         <h2>{{ this.hour }}:{{ this.min }}</h2>
     </div>
 </template>
@@ -25,3 +25,9 @@ export default {
     }
 }
 </script>
+
+<style lang="scss" scoped>
+.schedule-item {
+    padding: 0.5em;
+}
+</style>
