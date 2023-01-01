@@ -14,13 +14,11 @@ export default {
         },
         hour: {
             type: String,
-            required: false,
-            default: '12'
+            required: true
         },
         min: {
             type: String,
-            required: false,
-            default: '00'
+            required: true
         }
     }
 }

@@ -9,8 +9,9 @@
                         @click="handleCellClick(data.value.dayAbbr, data.item.rowKey)" />
                 </div>
                 <b-popover :target="this.$refs[this.getCellRef(data.value.dayAbbr, data.item.rowKey)]"
-                    placement="bottom" :ref="this.getPopoverRef(data.value.dayAbbr, data.item.rowKey)">
-                    <label class="text-dark">Demo text</label>
+                    placement="bottom">
+                    <PopoverContent :hour="this.popoverContentProp(data.value.hour)" 
+                        :min="this.popoverContentProp(data.value.min)" />
                 </b-popover>
             </template>
         </b-table>
@@ -19,12 +20,14 @@
 
 <script>
 import ScheduleItem from '../components/ScheduleItem.vue'
+import PopoverContent from '../components/PopoverContent.vue';
 
 const days = ['Sun', 'Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat'];
 
 export default {
     components: {
-        ScheduleItem
+        ScheduleItem,
+        PopoverContent
     },
     data() {
         return {
@@ -60,8 +63,8 @@ export default {
             days.forEach(day => {
                 rowObj[day] = {
                     dayAbbr: day,
-                    hour: '12',
-                    min: '00'
+                    hour: '--',
+                    min: '--'
                 }
             });
 
@@ -74,8 +77,12 @@ export default {
         getCellRef(dayAbbr, rowKey) {
             return `schedule-item-${dayAbbr}-${rowKey}`;
         },
-        getPopoverRef(dayAbbr, rowKey) {
-            return `popover-${dayAbbr}-${rowKey}`;
+        popoverContentProp(hourMin) {
+            if(hourMin === '--') {
+                return undefined;
+            } else {
+                return hourMin;
+            }
         },
         handleCellClick(dayAbbr, rowKey) {
             var newActiveCell = `${dayAbbr}-${rowKey}`;
