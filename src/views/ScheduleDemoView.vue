@@ -10,9 +10,8 @@
                 </div>
                 <b-popover :target="this.$refs[this.getCellRef(data.value.dayAbbr, data.item.rowKey)]"
                     placement="bottom">
-                    <PopoverContent :hour="this.popoverContentProp(data.value.hour)" 
-                        :min="this.popoverContentProp(data.value.min)"
-                        @submitted="onPopoverSubmit" />
+                    <PopoverContent :hour="this.popoverContentProp(data.value.hour)"
+                        :min="this.popoverContentProp(data.value.min)" @submitted="onPopoverSubmit" />
                 </b-popover>
             </template>
         </b-table>
@@ -66,7 +65,7 @@ export default {
         }
     },
     methods: {
-        getTableRow(rowIndex) {            
+        getTableRow(rowIndex) {
             var rowObj = {
                 rowKey: rowIndex
             };
@@ -90,7 +89,7 @@ export default {
             return `schedule-item-${dayAbbr}-${rowKey}`;
         },
         popoverContentProp(hourMin) {
-            if(hourMin === '--') {
+            if (hourMin === '--') {
                 return undefined;
             } else {
                 return hourMin;
@@ -107,12 +106,21 @@ export default {
             }
         },
         onPopoverSubmit(hour, min) {
-            console.log('hour: ', hour)
-            console.log('min:', min)
+            var day = this.activeDayRow[0];
+            var timeSlot = timeSlots[parseInt(this.activeDayRow[1])];
 
+            this.dayTimeData[day][timeSlot].hour = hour;
+            this.dayTimeData[day][timeSlot].min = min;
 
+            this.closeActivePopover();
+            this.activeCell = null;
         },
         closeActivePopover() {
+            /*
+            Note: this.activeCell MUST stay tightly coupled with the popover visibility.
+                This means that if you call this method to close a popover, 
+                this.activeCell should be updated accordingly, either to a new value or reset to null.
+            */
             if (this.activeCell) {
                 var ref = this.getCellRef(this.activeDayRow[0], this.activeDayRow[1]);
                 this.$refs[ref].click();
