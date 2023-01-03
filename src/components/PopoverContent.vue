@@ -4,6 +4,7 @@
             <b-form-input id="time-input" type="time" v-model="timeInput" required  />
         </b-form-group>
         <b-button type="submit" variant="primary">Submit</b-button>
+        <!-- TODO: Add "clear" button -->
     </b-form>
 </template>
 
@@ -42,6 +43,7 @@ export default {
     methods: {
         onSubmit() {
             var hourMin = this.timeInput.split(':');
+            // TODO: clear form after submit
             this.$emit('submitted', hourMin[0], hourMin[1]);
         }
     }

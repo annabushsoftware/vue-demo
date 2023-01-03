@@ -12,6 +12,7 @@
     "@popperjs/core": "^2.11.6",
     "bootstrap": "^5.2.3",
     "bootstrap-vue-3": "^0.4.15",
+    "moment": "^2.29.4",
     "pinia": "^2.0.28",
     "sass": "^1.57.1",
     "vue": "^3.2.45",
