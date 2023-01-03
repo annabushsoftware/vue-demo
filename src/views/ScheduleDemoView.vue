@@ -1,15 +1,11 @@
 <template>
     <div>
-        <b-table fixed
-                 bordered
-                 table-variant="light"
+        <b-table fixed bordered table-variant="light" table-class="schedule-table"
                  :fields="this.tableFields"
-                 :items="this.tableData"
-                 table-class="schedule-table">
+                 :items="this.tableData">
             <template #cell()="data">
                 <!-- TODO: make cells wider and center text so adding times will look good -->
-                <div class="cell-container"
-                     :ref="this.getCellRef(data.value.dayAbbr, data.item.rowKey)">
+                <div class="cell-container" :ref="this.getCellRef(data.value.dayAbbr, data.item.rowKey)">
                     <ScheduleItem :day="data.value.dayAbbr"
                                   :hour="data.value.hour"
                                   :min="data.value.min"
@@ -27,7 +23,6 @@
 </template>
 
 <script>
-// TODO: Fix html formatting to prefer one attribute per line if multi-line
 import ScheduleItem from '../components/ScheduleItem.vue'
 import PopoverContent from '../components/PopoverContent.vue';
 import moment from 'moment';
