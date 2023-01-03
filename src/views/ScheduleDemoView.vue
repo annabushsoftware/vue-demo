@@ -1,17 +1,25 @@
 <template>
     <div>
-        <b-table fixed bordered table-variant="light" :fields="this.tableFields" :items="this.tableData"
-            table-class="schedule-table">
+        <b-table fixed
+                 bordered
+                 table-variant="light"
+                 :fields="this.tableFields"
+                 :items="this.tableData"
+                 table-class="schedule-table">
             <template #cell()="data">
                 <!-- TODO: make cells wider and center text so adding times will look good -->
-                <div class="cell-container" :ref="this.getCellRef(data.value.dayAbbr, data.item.rowKey)">
-                    <ScheduleItem :day="data.value.dayAbbr" :hour="data.value.hour" :min="data.value.min"
-                        @click="onCellClick(data.value.dayAbbr, data.item.rowKey)" />
+                <div class="cell-container"
+                     :ref="this.getCellRef(data.value.dayAbbr, data.item.rowKey)">
+                    <ScheduleItem :day="data.value.dayAbbr"
+                                  :hour="data.value.hour"
+                                  :min="data.value.min"
+                                  @click="onCellClick(data.value.dayAbbr, data.item.rowKey)" />
                 </div>
                 <b-popover :target="this.$refs[this.getCellRef(data.value.dayAbbr, data.item.rowKey)]"
-                    placement="bottom">
+                           placement="bottom">
                     <PopoverContent :hour="this.getTimeOrUndefined(data.value.hour)"
-                        :min="this.getTimeOrUndefined(data.value.min)" @submitted="onPopoverSubmit" />
+                                    :min="this.getTimeOrUndefined(data.value.min)"
+                                    @submitted="onPopoverSubmit" />
                 </b-popover>
             </template>
         </b-table>
@@ -123,7 +131,7 @@ export default {
         },
         sortAndApplyTimes(submittedDay, submittedTimeSlot, submittedHour, submittedMin) {
             var submittedSlotIsFirst = submittedTimeSlot === timeSlots[0];
-            
+
             var theOtherSlot = submittedSlotIsFirst ? timeSlots[1] : timeSlots[0];
             var theOtherHour = this.dayTimeData[submittedDay][theOtherSlot].hour;
             var theOtherMin = this.dayTimeData[submittedDay][theOtherSlot].min;
@@ -169,19 +177,19 @@ export default {
                 var submittedTime = this.convertTimeToMoment(submittedHour, submittedMin);
                 var theOtherTime = this.convertTimeToMoment(theOtherHour, theOtherMin);
 
-                if(submittedTime.isSame(theOtherTime)) {
+                if (submittedTime.isSame(theOtherTime)) {
                     return SlotOrderingClassifiers.equal;
                 }
                 else if (submittedSlotIsFirst && submittedTime.isBefore(theOtherTime)) {
                     return SlotOrderingClassifiers.valid;
-                } 
+                }
                 else if (!submittedSlotIsFirst && theOtherTime.isBefore(submittedTime)) {
                     return SlotOrderingClassifiers.valid;
-                } else  {
+                } else {
                     return SlotOrderingClassifiers.reversed;
                 }
 
-            } else  {
+            } else {
                 return SlotOrderingClassifiers.valid;
             }
         },
